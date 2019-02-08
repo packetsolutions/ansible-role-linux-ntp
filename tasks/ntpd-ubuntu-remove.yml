@@ -1,0 +1,6 @@
+---
+- name: 'ntpd | ubuntu | remove ntpd packages'
+  become: yes
+  apt:
+    name: 'ntp'
+    state: 'absent'

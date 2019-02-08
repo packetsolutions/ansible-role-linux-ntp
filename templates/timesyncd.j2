@@ -1,0 +1,18 @@
+# {{ ansible_managed }}
+
+[Time]
+{% if ntp_servers is defined %}
+NTP={{ ntp_servers | join(' ') }}
+{% endif %}
+{% if ntp_servers_fallback is defined %}
+FallbackNTP={{ ntp_servers_fallback | join(' ') }}
+{% endif %}
+{% if ntp_root_distance_max_sec is defined %}
+RootDistanceMaxSec={{ ntp_root_distance_max_sec }}
+{% endif %}
+{% if ntp_poll_interval_min_sec is defined %}
+PollIntervalMinSec={{ ntp_poll_interval_min_sec }}
+{% endif %}
+{% if ntp_poll_interval_max_sec is defined %}
+PollIntervalMaxSec={{ ntp_poll_interval_max_sec }}
+{% endif %}

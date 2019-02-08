@@ -1,0 +1,28 @@
+---
+ntp_drift_file: '/var/lib/ntp/ntp.drift'
+ntp_statistics_dir:
+ntp_statistics: 'loopstats peerstats clockstats'
+ntp_file_generation_sets:
+  - 'filegen loopstats file loopstats type day enable'
+  - 'filegen peerstats file peerstats type day enable'
+  - 'filegen clockstats file clockstats type day enable'
+ntp_servers:
+  - '0.pool.ntp.org'
+  - '1.pool.ntp.org'
+  - '2.pool.ntp.org'
+  - '3.pool.ntp.org'
+ntp_peers: []
+ntp_restrictions:
+  - 'restrict -4 default kod notrap nomodify nopeer noquery'
+  - 'restrict -6 default kod notrap nomodify nopeer noquery'
+  - 'restrict 127.0.0.1'
+  - 'restrict ::1'
+ntp_fudge: false
+ntp_servers_fallback:
+  - '0.uk.pool.ntp.org'
+  - '1.uk.pool.ntp.org'
+  - '2.uk.pool.ntp.org'
+  - '3.uk.pool.ntp.org'
+ntp_root_distance_max_sec: 5
+ntp_poll_interval_min_sec: 32
+ntp_poll_interval_max_sec: 2048

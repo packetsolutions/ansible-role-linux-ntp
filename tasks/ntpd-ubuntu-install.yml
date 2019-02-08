@@ -1,0 +1,13 @@
+---
+- name: 'ntpd | ubuntu 18.04 | install universe'
+  apt_repository:
+    repo: "deb http://archive.ubuntu.com/ubuntu {{ ansible_distribution_release | lower }} universe"
+    state: present
+  become: yes
+  when: ansible_distribution_version == '18.04'
+
+- name: 'ntpd | ubuntu | install ntp packages'
+  apt:
+    name: 'ntp'
+    state: 'present'
+  become: yes

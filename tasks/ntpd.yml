@@ -1,0 +1,30 @@
+---
+- name: 'ntpd | stop systemd-timesyncd.service'
+  systemd:
+    name: systemd-timesyncd.service
+    state: stopped
+    enabled: no
+  become: yes
+  when: ansible_service_mgr == "systemd"
+
+- name: 'ntpd | ubuntu'
+  include: ntpd-ubuntu-install.yml
+  when:
+    - ansible_distribution == 'Ubuntu'
+
+- name: 'ntpd | configure /etc/ntpd.conf'
+  become: yes
+  template:
+    src: 'ntp.j2'
+    dest: '/etc/ntp.conf'
+    owner: 'root'
+    group: 'root'
+    mode: '0644'
+  notify: 'restart ntp'
+
+- name: 'ntpd | service start'
+  service:
+    name: ntp
+    state: started
+    enabled: yes
+  become: yes

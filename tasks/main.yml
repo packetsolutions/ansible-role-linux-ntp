@@ -1,0 +1,10 @@
+---
+- name: 'ntpd'
+  include: ntpd.yml
+  when: '"ntp_servers" in group_names or ansible_service_mgr != "systemd"'
+
+- name: 'systemd'
+  include: systemd.yml
+  when:
+    - '"ntp_servers" not in group_names'
+    - ansible_service_mgr == "systemd"
